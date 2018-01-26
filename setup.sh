@@ -52,7 +52,6 @@ ln -s /opt/metal/metal /usr/bin/
 ## SHAPEIT
 getfile $shapeit_url
 tar xf $(basename $shapeit_url)
-shapeit_name=$(basename $shapeit_url .tar.gz)
 chmod 755 $shapeit_name
 mv $shapeit_name /opt
 ln -s /opt/$shapeit_name/bin/shapeit /usr/bin/
