@@ -10,6 +10,10 @@ getfile() {
 apt update
 echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen && locale-gen en_US.utf8 && /usr/sbin/update-locale LANG=en_US.UTF-8
 
+getfile $shapeit_url
+tar xf $(basename $shapeit_url)
+chmod 755 $shapeit_name
+
 ## CRAN R
 apt-get install -y dirmngr
 apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9
