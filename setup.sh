@@ -1,5 +1,6 @@
 #!/bin/bash
 
+pushd $(dirname $0)
 . vars.sh
 
 ## Apt
@@ -18,8 +19,6 @@ apt-get install -y r-base
 ## Rstudio
 wget -nc $rstudio_url
 yes | apt install libxslt1-dev ./$(basename $rstudio_url)
-### FIXME
-#echo 'export QT_XKB_CONFIG_ROOT=/usr/share/X11/xkb' >>$SINGULARITY_ENVIRONMENT
 
 ## Ricopili
 apt-get -y install texlive
@@ -28,10 +27,8 @@ tar xf $(basename $ricopili_url)
 mv rp_bin /opt/
 chmod 755 /opt/rp_bin
 cd /opt/rp_bin
-### FIXME
-#export PATH=${PATH:+$PATH:}/opt/rp_bin:/usr/rp_bin/pdfjam
-#echo 'export PATH=${PATH:+$PATH:}/opt/rp_bin:/opt/rp_bin/pdfjam' >>$SINGULARITY_ENVIRONMENT
-#echo 8 | rp_config
+export PATH=${PATH:+$PATH:}/opt/rp_bin:/usr/rp_bin/pdfjam
+echo 8 | rp_config
 cd -
 
 ## liftOver
@@ -79,8 +76,6 @@ make clobber
 make install LDLIBS="-llapacke"
 cd -
 mv "EIG-$eigensoft_version" /opt/
-### FIXME
-#echo 'export PATH=${PATH:+$PATH:}/opt/'"EIG-$version"'/bin' >>$SINGULARITY_ENVIRONMENT
 
 ## EAGLE
 wget -nc $eagle_url
@@ -93,5 +88,11 @@ ln -s /opt/$eagle_name/eagle /usr/bin/
 ## Good practice to update library path
 ldconfig
 
+# System specific setup
+bash -e setup-mosler.sh
+
+
 ## Delete all the apt list files since they're big
+popd
+rm -rf psychflow
 rm -rf /var/lib/apt/lists/*
