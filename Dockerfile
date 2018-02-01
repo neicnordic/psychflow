@@ -1,4 +1,4 @@
-FROM ubuntu:artful
+FROM ubuntu:xenial
 
 COPY setup*.sh vars.sh cache/* /psychflow/
 

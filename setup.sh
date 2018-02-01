@@ -11,7 +11,7 @@ echo -e "en_US.UTF-8 UTF-8\nsv_SE.UTF-8 UTF-8" >> /etc/locale.gen && locale-gen 
 ## CRAN R
 apt-get install -y dirmngr
 apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9
-echo deb http://ftp.acc.umu.se/mirror/CRAN/bin/linux/ubuntu artful/ >> /etc/apt/sources.list
+echo deb http://ftp.acc.umu.se/mirror/CRAN/bin/linux/ubuntu xenial/ >> /etc/apt/sources.list
 apt update
 apt-get install -y r-base
 #R --slave -e 'install.packages("rmarkdown", repos="https://ftp.acc.umu.se/mirror/CRAN/")'
